@@ -1,0 +1,59 @@
+services:
+  postgres:
+    container_name: ms_pg_sql_new
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Chemege1.
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres:/var/lib/postgres/data
+    ports:
+      - 5432:5432
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  mongodb:
+    container_name: ms_mongo_db
+    image: mongo:7.0.12
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: azelit
+      MONGO_INITDB_ROOT_PASSWORD: Chemege1.
+    networks:
+      - microservices-net
+
+  mongo-express:
+    image: mongo-express:1.0.2
+    restart: "no"
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: azelit
+      ME_CONFIG_BASICAUTH_PASSWORD: Chemege1.
+      ME_CONFIG_MONGODB_SERVER: ms_mongo_db
+      ME_CONFIG_MONGODB_ADMINUSERNAME: azelit
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Chemege1.
+    networks:
+      - microservices-net
+
+  mail-dev:
+    container_name: ms_mail_dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      - microservices-net
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  postgres:
+  mongo:
