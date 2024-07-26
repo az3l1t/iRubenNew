@@ -1,0 +1,19 @@
+jwt:
+  secret: VuV8BeraqKtZMLyKbXXeUiWqoaH3/ynH9RM4olmZUAeTFu8/LsdCiA49Wxru3S2WTC4gcq7KrYGv3SJD91TTQNdPLHN/rUAsy6XCn5x19DnMrmr5c6cP5/0kjfDjhg6B9CJLnRf7smrlkfvu4ybEvxd2HA+b+PpUtPrpiNznskBcay+tmWxSloFxidaN/1xHbPl/I6i/hP4UvGxJJONQpaTEWNJi+Oixt/3UdQWuOU4U7sAIDtFSSza5DcE6B1HXIAoc+Q0FQ6/V6zRqRZt3hcwFRHMWEmX+t8ZuYxvoNfEeD1FN7F2xlkczd4Fjxyh5TCEx03/RcxEFRiRZR/vV4iHasXUYE7uhKz3d+UuhqSQ=
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jwt_security
+    username: postgres
+    password: Chemege1.
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+server:
+  port: 8005

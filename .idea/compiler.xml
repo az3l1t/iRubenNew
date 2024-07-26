@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="config-server" />
         <module name="discovery-server" />
+        <module name="frontend" />
         <module name="security-server" />
       </profile>
     </annotationProcessing>
@@ -17,6 +18,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="config-server" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
+      <module name="frontend" options="-parameters" />
       <module name="security-server" options="-parameters" />
     </option>
   </component>

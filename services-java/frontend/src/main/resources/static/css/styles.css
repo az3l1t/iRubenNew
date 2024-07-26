@@ -1,0 +1,78 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.logo-img {
+    width: 100px;
+}
+
+.main-container {
+    height: calc(100vh - 56px);
+    padding: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; /* Изменено на row для горизонтального выравнивания */
+}
+
+.video-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px; /* Добавить отступ справа для видео */
+}
+
+.main-video {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+}
+
+.form-container {
+    background-color: #333;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 100%;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+.btn-block {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+#back-button {
+    display: none;
+    margin-top: 10px;
+}
