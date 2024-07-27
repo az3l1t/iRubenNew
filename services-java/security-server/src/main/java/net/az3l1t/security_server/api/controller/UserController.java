@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//TODO НУЖНО СДЕЛАТЬ ТАК ЧТОБЫ ДРУГИЕ МИКРОСЕРВИСЫ ПОЛУЧАЛИ ЭТОТ ТОКЕН В СВОЕМ ЗАГОЛОВКЕ ()->ТОКЕН ХРАНИТЬ В БРАУЗЕРЕ
 @RestController
 @CrossOrigin(origins = "http://localhost:8010")
 public class UserController {

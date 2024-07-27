@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    // Обработчик клика по кнопке "Войти"
+    let isSubmitting = false; // Флаг для предотвращения повторной отправки
+
     $('#login-button').click(function() {
         $('#form-buttons').hide();
         $('#dynamic-form').empty().show();
         createLoginForm();
     });
 
-    // Обработчик клика по кнопке "Зарегистрироваться"
     $('#register-button').click(function() {
         $('#form-buttons').hide();
         $('#dynamic-form').empty().show();
@@ -21,9 +21,10 @@ $(document).ready(function() {
             });
         });
 
-        // Удаление предыдущих обработчиков submit перед добавлением нового
         $('#dynamic-form').off('submit').on('submit', function(e) {
             e.preventDefault();
+            if (isSubmitting) return; // Предотвращаем повторную отправку
+            isSubmitting = true;
             const username = $('input[name="username"]').val();
             const password = $('input[name="password"]').val();
             authenticateUser(username, password);
@@ -42,9 +43,10 @@ $(document).ready(function() {
             });
         });
 
-        // Удаление предыдущих обработчиков submit перед добавлением нового
         $('#dynamic-form').off('submit').on('submit', function(e) {
             e.preventDefault();
+            if (isSubmitting) return; // Предотвращаем повторную отправку
+            isSubmitting = true;
             const firstName = $('input[name="first_name"]').val();
             const lastName = $('input[name="last_name"]').val();
             const username = $('input[name="username"]').val();
@@ -82,17 +84,15 @@ $(document).ready(function() {
             data: JSON.stringify({ firstname: firstName, lastname: lastName, username: username, password: password }),
             success: function(response) {
                 console.log('Registration successful:', response);
-                // Сохраните токен в localStorage
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
                 }
-                // Отправляем запрос для успешного перехода
-                redirectToSuccessPage();
+                fetchNewsAndRedirect();
             },
             error: function(error) {
                 console.error('Registration error:', error);
-                // Добавьте уведомление об ошибке
                 alert('Ошибка регистрации. Пожалуйста, попробуйте еще раз.');
+                isSubmitting = false; // Разрешить повторные попытки
             }
         });
     }
@@ -105,30 +105,35 @@ $(document).ready(function() {
             data: JSON.stringify({ username: username, password: password }),
             success: function(response) {
                 console.log('Authentication successful:', response);
-                // Сохраните токен в localStorage
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
                 }
-                // Отправляем запрос для успешного перехода
-                redirectToSuccessPage();
+                fetchNewsAndRedirect();
             },
             error: function(error) {
                 console.error('Authentication error:', error);
-                // Добавьте уведомление об ошибке
                 alert('Ошибка аутентификации. Пожалуйста, проверьте свои данные.');
+                isSubmitting = false; // Разрешить повторные попытки
             }
         });
     }
 
-    function redirectToSuccessPage() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/success", true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
+    function fetchNewsAndRedirect() {
+        $.ajax({
+            url: 'http://localhost:8015/news',
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            },
+            success: function(news) {
+                console.log('News fetched:', news);
                 window.location.href = "/success";
+            },
+            error: function(error) {
+                console.error('Error fetching news:', error);
+                alert('Ошибка получения новостей.');
+                isSubmitting = false; // Разрешить повторные попытки
             }
-        };
-        xhr.send();
+        });
     }
-
 });
