@@ -1,10 +1,12 @@
 $(document).ready(function() {
+    // Обработчик клика по кнопке "Войти"
     $('#login-button').click(function() {
         $('#form-buttons').hide();
         $('#dynamic-form').empty().show();
         createLoginForm();
     });
 
+    // Обработчик клика по кнопке "Зарегистрироваться"
     $('#register-button').click(function() {
         $('#form-buttons').hide();
         $('#dynamic-form').empty().show();
@@ -19,7 +21,8 @@ $(document).ready(function() {
             });
         });
 
-        $('#dynamic-form').on('submit', function(e) {
+        // Удаление предыдущих обработчиков submit перед добавлением нового
+        $('#dynamic-form').off('submit').on('submit', function(e) {
             e.preventDefault();
             const username = $('input[name="username"]').val();
             const password = $('input[name="password"]').val();
@@ -39,7 +42,8 @@ $(document).ready(function() {
             });
         });
 
-        $('#dynamic-form').on('submit', function(e) {
+        // Удаление предыдущих обработчиков submit перед добавлением нового
+        $('#dynamic-form').off('submit').on('submit', function(e) {
             e.preventDefault();
             const firstName = $('input[name="first_name"]').val();
             const lastName = $('input[name="last_name"]').val();
@@ -61,7 +65,7 @@ $(document).ready(function() {
     }
 
     function addBackButton() {
-        let backButton = $('<button id="back-button" class="btn btn-secondary btn-block">Назад</button>');
+        let backButton = $('<button type="button" id="back-button" class="btn btn-secondary btn-block">Назад</button>');
         $('#dynamic-form').append(backButton);
         backButton.show();
         backButton.click(function() {
@@ -82,10 +86,8 @@ $(document).ready(function() {
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
                 }
-                // Здесь можно добавить уведомление о успешной регистрации
-                alert('Регистрация успешна! Вы будете автоматически аутентифицированы.');
-                // При необходимости можно перенаправить пользователя
-                // window.location.href = '/some-page';
+                // Отправляем запрос для успешного перехода
+                redirectToSuccessPage();
             },
             error: function(error) {
                 console.error('Registration error:', error);
@@ -107,10 +109,8 @@ $(document).ready(function() {
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
                 }
-                // Здесь можно добавить уведомление о успешной аутентификации
-                alert('Аутентификация успешна!');
-                // При необходимости можно перенаправить пользователя
-                // window.location.href = '/some-page';
+                // Отправляем запрос для успешного перехода
+                redirectToSuccessPage();
             },
             error: function(error) {
                 console.error('Authentication error:', error);
@@ -119,4 +119,16 @@ $(document).ready(function() {
             }
         });
     }
+
+    function redirectToSuccessPage() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/success", true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                window.location.href = "/success";
+            }
+        };
+        xhr.send();
+    }
+
 });

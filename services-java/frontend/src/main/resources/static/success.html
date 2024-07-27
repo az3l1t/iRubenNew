@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изучение армянского</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/success.css">
+</head>
+<body>
+<header class="d-flex justify-content-between align-items-center p-3 bg-dark">
+    <nav class="header-nav">
+        <a href="#alphabet" class="nav-item">Алфавит</a>
+        <a href="#words" class="nav-item">Слова</a>
+        <a href="#guess" class="nav-item">Угадайка</a>
+        <a href="#history" class="nav-item">История</a>
+        <button id="logout" class="logout-btn">
+            <img src="img/logout.png" alt="Выйти" class="logout-icon">
+        </button>
+
+    </nav>
+    <div class="logo">
+        <img src="img/icon.svg" alt="Logo" class="logo-img">
+    </div>
+</header>
+
+<div class="main-content d-flex">
+    <aside class="sidebar">
+        <video class="sidebar-video" autoplay loop muted>
+            <source src="3d-control.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <button class="sidebar-btn">Алфавит</button>
+        <button class="sidebar-btn">Слова</button>
+        <button class="sidebar-btn">Угадайка</button>
+        <button class="sidebar-btn">История</button>
+    </aside>
+    <main class="news-container">
+        <h2 class="text-white">Последние новости</h2>
+        <!-- Здесь можно добавить новости или другой контент -->
+    </main>
+</div>
+<!--TODO сделать перенаправление через backend-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    document.getElementById('logout').addEventListener('click', function() {
+        localStorage.removeItem('authToken');
+        // Перенаправление на страницу входа или домашнюю страницу
+        window.location.href = 'index.html'; // Замените на нужный URL
+    });
+</script>
+<!--<script src="js/scripts.js"></script>-->
+</body>
+</html>

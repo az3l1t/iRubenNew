@@ -1,0 +1,159 @@
+body {
+    background-image: url('bg-website-min.png'); /* Укажите путь к вашей фотографии */
+    background-size: cover; /* Чтобы фотография занимала весь фон */
+    background-position: center; /* Центрирование фотографии */
+    background-repeat: no-repeat; /* Чтобы фотография не повторялась */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.logo-img {
+    width: 100px;
+    margin-left: 200px; /* Сдвигаем иконку вправо */
+    margin-right: 360px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 20px;
+    margin-right: 200px; /* Сдвигаем кнопки влево */
+    margin-left: 550px;
+    align-items: center; /* Выравниваем элементы по центру по вертикали */
+}
+
+.nav-item {
+    color: #000; /* Черный цвет текста для кнопок */
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 5px; /* Отступ снизу для линии */
+}
+
+.nav-item:hover {
+    color: #fff; /* Белый цвет при наведении */
+    text-decoration: none;
+}
+
+.nav-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff; /* Белая линия */
+    transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+.logout-btn {
+    background: none; /* Убираем фон */
+    border: none; /* Убираем границу */
+    padding: 0; /* Убираем отступы */
+    cursor: pointer; /* Указатель мыши */
+    position: relative;
+    margin-top: -5px;
+}
+
+.logout-icon {
+    width: 24px; /* Установите размер иконки */
+    height: auto; /* Сохраняем пропорции */
+    display: block;
+}
+
+.logout-btn:hover .logout-icon {
+    filter: brightness(0) invert(1); /* Применение эффекта при наведении */
+}
+
+/* Удаляем анимацию появления линии снизу */
+.logout-btn::after {
+    content: none; /* Убираем линию снизу */
+}
+
+.logout-btn:hover::after {
+    width: 100%;
+}
+
+
+.main-content {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    gap: 20px; /* Добавлено пространство между боковой панелью и новостями */
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    margin-top: 20px;
+    align-items: center; /* Центрируем содержимое сайдбара */
+    margin-left: 500px;
+}
+
+.sidebar-video {
+    width: 40%; /* Уменьшаем ширину видео */
+    border-radius: 10px; /* Слегка скругляем углы видео */
+}
+
+.sidebar-btn {
+    background-color: #333; /* Темный цвет для кнопок */
+    border: 2px solid #444; /* Темноватая граница */
+    color: #fff;
+    padding: 20px;
+    font-size: 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 80%; /* Задаем ширину кнопок */
+    margin-top: 20px; /* Добавляем отступ сверху */
+}
+
+.sidebar-btn:hover {
+    background-color: #f0ad4e; /* Нежный оранжевый цвет при наведении */
+    border-color: #e0a94a; /* Немного измененный цвет границы при наведении */
+    transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+.sidebar-btn:nth-child(3):hover {
+    background-color: #5bc0de; /* Нежный голубой цвет при наведении */
+    border-color: #4da3c1; /* Немного измененный цвет границы при наведении */
+}
+
+.sidebar-btn:nth-child(4):hover {
+    background-color: #5cb85c; /* Нежный зеленый цвет при наведении */
+    border-color: #4a9b4a; /* Немного измененный цвет границы при наведении */
+}
+
+.sidebar-btn:nth-child(5):hover {
+    background-color: #d9534f; /* Нежный красный цвет при наведении */
+    border-color: #c12d2a; /* Немного измененный цвет границы при наведении */
+}
+
+.news-container {
+    flex: 2; /* Уменьшить ширину контейнера с новостями */
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 400px; /* Уменьшить максимальную ширину контейнера */
+    height: 80vh; /* Высота контейнера новостей */
+    margin-right: 350px;
+}
+
+.news-container h2 {
+    margin-bottom: 20px;
+}
