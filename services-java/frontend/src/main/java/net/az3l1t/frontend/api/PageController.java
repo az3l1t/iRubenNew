@@ -9,4 +9,8 @@ public class PageController {
     public String toSuccess() {
         return "success.html";
     }
+    @GetMapping("/alphabet")
+    public String toAlphabet() {
+        return "alphabet.html";
+    }
 }

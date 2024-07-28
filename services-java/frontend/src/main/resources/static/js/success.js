@@ -36,3 +36,35 @@ $(document).ready(function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Получаем все кнопки, которые должны перенаправлять на страницу алфавита
+    const alphabetButtons = document.querySelectorAll('#alphabet-btn, .nav-item[href="#alphabet"]');
+
+    alphabetButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Предотвращаем стандартное действие ссылки
+
+            const token = localStorage.getItem('authToken'); // Получаем токен из localStorage
+
+            if (token) {
+                // Проверяем токен и перенаправляем
+                $.ajax({
+                    url: '/alphabet',
+                    type: 'GET',
+                    success: function(response) {
+                        window.location.href = '/alphabet'; // Перенаправляем на страницу алфавита
+                    },
+                    error: function() {
+                        alert('Ошибка при проверке аутентификации.');
+                    },
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + token); // Добавляем токен в заголовок запроса
+                    }
+                });
+            } else {
+                alert('Токен аутентификации не найден. Пожалуйста, войдите в систему.');
+            }
+        });
+    });
+});

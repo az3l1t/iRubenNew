@@ -41,7 +41,7 @@ public class UserService {
         user = userRepository.save(user);
 
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, user.getUsername());
     }
 
     //todo Not user but userRequest
@@ -58,6 +58,6 @@ public class UserService {
         );
         String token = jwtService.generateToken(user);
 
-        return new AuthenticationResponse(token);
+        return new AuthenticationResponse(token, user.getUsername());
     }
 }

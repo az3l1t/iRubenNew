@@ -5,10 +5,7 @@ import net.az3l1t.security_server.api.dto.UserRequestAuthenticate;
 import net.az3l1t.security_server.core.entity.User;
 import net.az3l1t.security_server.service.impl.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8010")
@@ -32,4 +29,5 @@ public class UserController {
             ) {
         return ResponseEntity.ok(userService.authenticate(request));
     }
+
 }

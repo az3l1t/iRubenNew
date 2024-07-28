@@ -1,0 +1,59 @@
+body {
+    background-image: url('bg-website-min.png'); /* Укажите путь к вашей фотографии */
+    background-size: cover; /* Чтобы фотография занимала весь фон */
+    background-position: center; /* Центрирование фотографии */
+    background-repeat: no-repeat; /* Чтобы фотография не повторялась */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.logo-img {
+    width: 100px;
+}
+
+.alphabet-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.letter-block {
+    background-color: #555;
+    border: 2px solid #666;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 2.5rem; /* Увеличенный размер букв */
+    width: 80px; /* Увеличенный размер кнопок */
+    height: 80px; /* Увеличенный размер кнопок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px; /* Увеличенное расстояние между кнопками */
+    transition: transform 0.3s; /* Анимация при наведении */
+    cursor: pointer; /* Курсор при наведении */
+}
+
+.letter-block:hover {
+    transform: scale(1.2); /* Увеличение при наведении */
+}
+
+.gif-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.gif-container img {
+    max-width: 60%;
+    height: auto;
+}

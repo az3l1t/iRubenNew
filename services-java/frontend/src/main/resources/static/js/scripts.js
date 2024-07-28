@@ -83,9 +83,14 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify({ firstname: firstName, lastname: lastName, username: username, password: password }),
             success: function(response) {
-                console.log('Registration successful:', response);
+                console.log('Response from server:', response);
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
+                    console.log('Token saved to localStorage:', response.token);
+                }
+                if (response.username) {
+                    localStorage.setItem('username', response.username);
+                    console.log('Username saved to localStorage:', response.username);
                 }
                 fetchNewsAndRedirect();
             },
@@ -104,9 +109,14 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify({ username: username, password: password }),
             success: function(response) {
-                console.log('Authentication successful:', response);
+                console.log('Response from server:', response);
                 if (response.token) {
                     localStorage.setItem('authToken', response.token);
+                    console.log('Token saved to localStorage:', response.token);
+                }
+                if (response.username) {
+                    localStorage.setItem('username', response.username);
+                    console.log('Username saved to localStorage:', response.username);
                 }
                 fetchNewsAndRedirect();
             },
@@ -117,6 +127,7 @@ $(document).ready(function() {
             }
         });
     }
+
 
     function fetchNewsAndRedirect() {
         $.ajax({

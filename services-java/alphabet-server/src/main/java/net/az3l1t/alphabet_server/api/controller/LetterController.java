@@ -22,6 +22,7 @@ public class LetterController {
     }
 
     @QueryMapping
+    @CrossOrigin(origins = "http://localhost:8010")
     public List<Letter> getAllLetters(){
         return letterService.getAllLetter();
     }
