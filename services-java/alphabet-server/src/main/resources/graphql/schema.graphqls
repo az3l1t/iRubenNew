@@ -1,0 +1,18 @@
+input LetterRequest {
+    character: String!
+}
+
+type Letter {
+    id: Int!
+    character: String!
+}
+
+type Query {
+    getAllLetters: [Letter]
+    getLetterById(id: Int!): Letter
+}
+
+type Mutation {
+    addLetter(letterRequest: LetterRequest!): Letter
+    deleteLetter(id: Int!): Boolean
+}

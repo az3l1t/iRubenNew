@@ -12,11 +12,13 @@
         <module name="discovery-server" />
         <module name="frontend" />
         <module name="security-server" />
+        <module name="alphabet-server" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="alphabet-server" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="frontend" options="-parameters" />

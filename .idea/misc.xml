@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/services-java/security-server/pom.xml" />
         <option value="$PROJECT_DIR$/services-java/frontend/pom.xml" />
         <option value="$PROJECT_DIR$/services-java/news-server/pom.xml" />
+        <option value="$PROJECT_DIR$/services-java/alphabet-server/pom.xml" />
       </list>
     </option>
   </component>
