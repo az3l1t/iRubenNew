@@ -1,6 +1,8 @@
 package net.az3l1t.security_server.api.controller;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import net.az3l1t.security_server.api.dto.AuthenticationResponse;
+import net.az3l1t.security_server.api.dto.ExpResponse;
 import net.az3l1t.security_server.api.dto.UserRequestAuthenticate;
 import net.az3l1t.security_server.core.entity.User;
 import net.az3l1t.security_server.service.impl.UserService;
@@ -28,6 +30,14 @@ public class UserController {
             @RequestBody UserRequestAuthenticate request
             ) {
         return ResponseEntity.ok(userService.authenticate(request));
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<ExpResponse> getExpByUsername(
+            @PathVariable String username
+    )
+    {
+        return ResponseEntity.ok(userService.getExpByUsername(username));
     }
 
 }

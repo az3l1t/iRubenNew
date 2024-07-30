@@ -1,6 +1,7 @@
 package net.az3l1t.security_server.service.impl;
 
 import net.az3l1t.security_server.api.dto.AuthenticationResponse;
+import net.az3l1t.security_server.api.dto.ExpResponse;
 import net.az3l1t.security_server.api.dto.UserRequestAuthenticate;
 import net.az3l1t.security_server.core.entity.Role;
 import net.az3l1t.security_server.core.entity.User;
@@ -10,6 +11,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -59,5 +62,12 @@ public class UserService {
         String token = jwtService.generateToken(user);
 
         return new AuthenticationResponse(token, user.getUsername());
+    }
+
+    public ExpResponse getExpByUsername(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(
+                ()->new RuntimeException("User was not found : %s".formatted(username))
+        );
+        return new ExpResponse(user.getExp());
     }
 }

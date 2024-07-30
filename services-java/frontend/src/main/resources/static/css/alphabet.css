@@ -57,3 +57,14 @@ header {
     max-width: 60%;
     height: auto;
 }
+
+.modal-content {
+    background-color: #333;
+    color: #fff;
+}
+
+.letter-image-container img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}

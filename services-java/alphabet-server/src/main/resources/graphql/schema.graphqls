@@ -1,3 +1,31 @@
+"""
+Info for LetterButtonService
+"""
+input LetterButtonRequest {
+    character: String!
+    urlToPhoto: String!
+    word: String!
+    sentence: String!
+}
+
+input LetterCharacterRequest {
+    character: String!
+}
+
+type LetterButtonResponse {
+    character: String!
+}
+
+type LetterButtonWithInfoResponse {
+    character: String!
+    urlToPhoto: String!
+    word: String!
+    sentence: String!
+}
+
+"""
+Info for LetterService
+"""
 input LetterRequest {
     character: String!
 }
@@ -8,11 +36,28 @@ type Letter {
 }
 
 type Query {
+    """
+    LetterController
+    """
     getAllLetters: [Letter]
     getLetterById(id: Int!): Letter
+    """
+    LetterButtonController
+    """
+    getLetterButtonWithInfoById(request: LetterCharacterRequest!): LetterButtonWithInfoResponse
+    getAllButtons: [LetterButtonWithInfoResponse]
 }
 
+
 type Mutation {
+    """
+    LetterController
+    """
     addLetter(letterRequest: LetterRequest!): Letter
     deleteLetter(id: Int!): Boolean
+
+    """
+    LetterButtonController
+    """
+    createNewLetterButton(request: LetterButtonRequest!): LetterButtonResponse
 }
