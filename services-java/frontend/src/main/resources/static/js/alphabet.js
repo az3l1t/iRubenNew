@@ -50,11 +50,9 @@ $(document).ready(function() {
                 data: JSON.stringify({
                     query: `
                         query {
-                            getLetter(character: "${character}") {
+                            getLetterButtonWithInfoById(request: {character: "${character}"}) {
                                 character
-                                script
-                                sound
-                                image
+                                urlToPhoto
                                 word
                                 sentence
                             }
@@ -62,18 +60,21 @@ $(document).ready(function() {
                     `
                 }),
                 success: function(response) {
-                    const letter = response.data.getLetter;
-                    // Заполняем модальное окно данными из ответа сервера
-                    $('#letterModalLabel').text(`Буква: ${letter.character}`);
-                    $('#letterCharacter').text(letter.character);
-                    $('#letterScript').text(letter.script);
-                    $('#letterSound').attr('src', letter.sound);
-                    $('#letterImage').attr('src', letter.image);
-                    $('#letterWord').text(letter.word);
-                    $('#letterSentence').text(letter.sentence);
+                    console.log('Letter data fetched:', response); // Выводим полный ответ сервера в консоль
+                    const letter = response.data.getLetterButtonWithInfoById;
+                    if (letter) {
+                        // Заполняем модальное окно данными из ответа сервера
+                        $('#letterModalLabel').text(`Буква: ${letter.character}`);
+                        $('#letterCharacter').text(letter.character);
+                        $('#letterImage').attr('src', letter.urlToPhoto); // используем новый путь
+                        $('#letterWord').text(letter.word);
+                        $('#letterSentence').text(letter.sentence);
 
-                    // Показываем модальное окно
-                    $('#letterModal').modal('show');
+                        // Показываем модальное окно
+                        $('#letterModal').modal('show');
+                    } else {
+                        alert('Буква не найдена.');
+                    }
                 },
                 error: function() {
                     alert('Ошибка при получении данных о букве.');
@@ -83,6 +84,7 @@ $(document).ready(function() {
             alert('Токен аутентификации не найден. Пожалуйста, войдите в систему.');
         }
     }
+
 
     // Обработчик на кнопке выхода для удаления токена
     $('#logout').on('click', function() {
