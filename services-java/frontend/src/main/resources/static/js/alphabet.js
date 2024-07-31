@@ -52,7 +52,6 @@ $(document).ready(function() {
                         query {
                             getLetterButtonWithInfoById(request: {character: "${character}"}) {
                                 character
-                                urlToPhoto
                                 word
                                 sentence
                             }
@@ -66,7 +65,6 @@ $(document).ready(function() {
                         // Заполняем модальное окно данными из ответа сервера
                         $('#letterModalLabel').text(`Буква: ${letter.character}`);
                         $('#letterCharacter').text(letter.character);
-                        $('#letterImage').attr('src', letter.urlToPhoto); // используем новый путь
                         $('#letterWord').text(letter.word);
                         $('#letterSentence').text(letter.sentence);
 

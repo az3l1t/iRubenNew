@@ -14,7 +14,7 @@ public class NewsMapper {
             return null;
         }
         return new News(
-                newsRequest.getTitle(), newsRequest.getInformation(), newsRequest.getLinkToPhoto()
+                newsRequest.getTitle(), newsRequest.getInformation()
         );
     }
 
@@ -22,8 +22,7 @@ public class NewsMapper {
         return new NewResponse(
                 news.getId(),
                 news.getTitle(),
-                news.getInformation(),
-                news.getLinkToPhoto()
+                news.getInformation()
         );
     }
 }

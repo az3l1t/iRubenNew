@@ -5,14 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LetterButtonWithInfoResponse {
+public class LetterGameResponse {
     private String character;
-//    private String urlToPhoto;
-    private String word;
-    private String sentence;
-
+    private List<String> listOfWords;
 }

@@ -10,7 +10,6 @@ public class LetterButtonMapper {
     public LetterButtonEntity toLetterButton(LetterButtonRequest request) {
         return new LetterButtonEntity(
                 request.getCharacter(),
-                request.getUrlToPhoto(),
                 request.getWord(),
                 request.getSentence()
         );
@@ -19,7 +18,6 @@ public class LetterButtonMapper {
     public LetterButtonWithInfoResponse toLetterWithInfo(LetterButtonEntity letterButtonEntity) {
         return new LetterButtonWithInfoResponse(
                 letterButtonEntity.getCharacter(),
-                letterButtonEntity.getUrlToPhoto(),
                 letterButtonEntity.getWord(),
                 letterButtonEntity.getSentence()
         );

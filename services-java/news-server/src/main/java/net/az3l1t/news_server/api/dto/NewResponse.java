@@ -13,5 +13,4 @@ public class NewResponse {
     private String id;
     private String title;
     private String information;
-    private String url;
 }

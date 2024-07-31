@@ -21,7 +21,7 @@ public class NewsService {
 
     public NewResponse createNew(NewsRequest newsRequest) {
         News news = newsRepository.save(mapper.toNews(newsRequest));
-        return new NewResponse(news.getId(), news.getTitle(), news.getInformation(), news.getLinkToPhoto());
+        return new NewResponse(news.getId(), news.getTitle(), news.getInformation());
     }
 
     public List<NewResponse> findAll() {

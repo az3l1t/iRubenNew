@@ -1,3 +1,13 @@
+input LetterGameRequest {
+    character: String!
+    listOfWords: [String!]!
+}
+
+type LetterGameResponse {
+    character: String!
+    listOfWords: [String!]!
+}
+
 """
 Info for LetterButtonService
 """
@@ -41,13 +51,18 @@ type Query {
     """
     getAllLetters: [Letter]
     getLetterById(id: Int!): Letter
+
     """
     LetterButtonController
     """
     getLetterButtonWithInfoById(request: LetterCharacterRequest!): LetterButtonWithInfoResponse
     getAllButtons: [LetterButtonWithInfoResponse]
-}
 
+    """
+    LetterGameController
+    """
+    findById(character: String!): LetterGameResponse
+}
 
 type Mutation {
     """
@@ -60,4 +75,9 @@ type Mutation {
     LetterButtonController
     """
     createNewLetterButton(request: LetterButtonRequest!): LetterButtonResponse
+
+    """
+    LetterGameController
+    """
+    createNewLetterGame(request: LetterGameRequest!): LetterGameResponse
 }

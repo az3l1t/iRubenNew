@@ -3,5 +3,6 @@
   <component name="AmplicodeJpaIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
+    <option name="newEntityIdStrategy" />
   </component>
 </project>

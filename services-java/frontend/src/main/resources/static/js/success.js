@@ -29,7 +29,6 @@ $(document).ready(function() {
                 <div class="news-item">
                     <h3 class="news-title">${item.title}</h3>
                     <p class="news-info">${item.information}</p>
-                    <img src="${item.linkToPhoto}" alt="${item.title}" class="news-image" />
                 </div>
             `);
             newsContainer.append(newsElement);

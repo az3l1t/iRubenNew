@@ -12,5 +12,4 @@ import lombok.Setter;
 public class NewsRequest {
     private String title;
     private String information;
-    private String linkToPhoto;
 }
