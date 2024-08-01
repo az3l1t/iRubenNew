@@ -1,13 +1,13 @@
 package net.az3l1t.security_server.api.controller;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
 import net.az3l1t.security_server.api.dto.AuthenticationResponse;
 import net.az3l1t.security_server.api.dto.ExpResponse;
 import net.az3l1t.security_server.api.dto.UserRequestAuthenticate;
 import net.az3l1t.security_server.core.entity.User;
 import net.az3l1t.security_server.service.impl.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8010")
@@ -19,25 +19,32 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
+    public CompletableFuture<AuthenticationResponse> register(
             @RequestBody User request
     ) {
-        return ResponseEntity.ok(userService.register(request));
+        return userService.register(request);
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> login(
+    public CompletableFuture<AuthenticationResponse> login(
             @RequestBody UserRequestAuthenticate request
             ) {
-        return ResponseEntity.ok(userService.authenticate(request));
+        return userService.authenticate(request);
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<ExpResponse> getExpByUsername(
+    public CompletableFuture<ExpResponse> getExpByUsername(
             @PathVariable String username
     )
     {
-        return ResponseEntity.ok(userService.getExpByUsername(username));
+        return userService.getExpByUsername(username);
+    }
+
+    @GetMapping("/addExp/{username}")
+    public CompletableFuture<ExpResponse> addExp(
+            @PathVariable String username
+    ) {
+        return userService.addExp(username);
     }
 
 }

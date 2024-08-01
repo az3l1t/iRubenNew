@@ -1,11 +1,13 @@
 input LetterGameRequest {
     character: String!
-    listOfWords: [String!]!
+    listOfArmenianWords: [String!]!
+    listOfRussianWords: [String!]!
 }
 
 type LetterGameResponse {
     character: String!
-    listOfWords: [String!]!
+    listOfArmenianWords: [String!]!
+    listOfRussianWords: [String!]!
 }
 
 """

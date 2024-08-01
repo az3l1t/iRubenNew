@@ -13,5 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 public class LetterGameRequest {
     private String character;
-    private List<String> listOfWords;
+    private List<String> listOfArmenianWords;
+    private List<String> listOfRussianWords;
 }

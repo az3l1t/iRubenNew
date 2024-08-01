@@ -7,12 +7,14 @@ import net.az3l1t.security_server.core.entity.Role;
 import net.az3l1t.security_server.core.entity.User;
 import net.az3l1t.security_server.infrastructure.repository.UserRepository;
 import net.az3l1t.security_server.service.jwt.JwtService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class UserService {
@@ -27,8 +29,8 @@ public class UserService {
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
     }
-
-    public AuthenticationResponse register(User request){
+    @Async
+    public CompletableFuture<AuthenticationResponse> register(User request){
         User user = new User();
         user.setFirstname(request.getFirstname());
         user.setLastname(request.getLastname());
@@ -44,11 +46,10 @@ public class UserService {
         user = userRepository.save(user);
 
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token, user.getUsername());
+        return CompletableFuture.completedFuture(new AuthenticationResponse(token, user.getUsername()));
     }
-
-    //todo Not user but userRequest
-    public AuthenticationResponse authenticate(UserRequestAuthenticate request){
+    @Async
+    public CompletableFuture<AuthenticationResponse> authenticate(UserRequestAuthenticate request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getUsername(),
@@ -61,13 +62,22 @@ public class UserService {
         );
         String token = jwtService.generateToken(user);
 
-        return new AuthenticationResponse(token, user.getUsername());
+        return CompletableFuture.completedFuture(new AuthenticationResponse(token, user.getUsername()));
     }
-
-    public ExpResponse getExpByUsername(String username) {
+    @Async
+    public CompletableFuture<ExpResponse> getExpByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(
                 ()->new RuntimeException("User was not found : %s".formatted(username))
         );
-        return new ExpResponse(user.getExp());
+        return CompletableFuture.completedFuture(new ExpResponse(user.getExp()));
+    }
+    @Async
+    public CompletableFuture<ExpResponse> addExp(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(
+                ()->new RuntimeException("User was not found : %s".formatted(username))
+        );
+        user.setExp(user.getExp()+1);
+        userRepository.save(user);
+        return CompletableFuture.completedFuture(new ExpResponse(user.getExp()));
     }
 }

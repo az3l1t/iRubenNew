@@ -10,13 +10,15 @@ public class LetterGameMapper {
     public LetterGame toLetterGame(LetterGameRequest request) {
         return new LetterGame(
                 request.getCharacter(),
-                request.getListOfWords()
+                request.getListOfArmenianWords(),
+                request.getListOfRussianWords()
         );
     }
     public LetterGameResponse toLetterGameResponse(LetterGame letterGame) {
         return new LetterGameResponse(
                 letterGame.getCharacter(),
-                letterGame.getListOfWords()
+                letterGame.getListOfArmenianWords(),
+                letterGame.getListOfRussianWords()
         );
     }
 }

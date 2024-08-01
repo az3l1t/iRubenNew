@@ -15,6 +15,9 @@
 </header>
 
 <main class="container d-flex flex-column align-items-center">
+    <div id="welcome-message" class="welcome-message">
+        <!-- Приветственное сообщение будет вставлено сюда -->
+    </div>
     <div class="alphabet-container">
         <!-- Контейнер для букв -->
     </div>
@@ -37,12 +40,24 @@
                 <h2 id="letterCharacter"></h2>
                 <h4 id="letterWord"></h4>
                 <p id="letterSentence"></p>
+                <!-- Кнопка начала игры -->
+                <button type="button" class="btn btn-primary" id="startGameButton">Начать игру</button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             </div>
         </div>
     </div>
+</div>
+
+<!-- Игровое окно -->
+<div id="game-container" class="game-container">
+    <h3 id="current-word"></h3>
+    <form id="game-form">
+        <input type="text" class="form-control" id="guess" placeholder="Введите ваше слово">
+        <button type="submit" class="btn btn-primary">Проверить</button>
+    </form>
+    <div id="result" class="result"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
