@@ -5,9 +5,11 @@ import net.az3l1t.news_server.api.dto.NewsRequest;
 import net.az3l1t.news_server.core.entity.News;
 import net.az3l1t.news_server.infrastructure.repository.NewsRepository;
 import net.az3l1t.news_server.service.mapper.NewsMapper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class NewsService {
@@ -18,25 +20,25 @@ public class NewsService {
         this.newsRepository = newsRepository;
         this.mapper = mapper;
     }
-
-    public NewResponse createNew(NewsRequest newsRequest) {
+    @Async
+    public CompletableFuture<NewResponse> createNew(NewsRequest newsRequest) {
         News news = newsRepository.save(mapper.toNews(newsRequest));
-        return new NewResponse(news.getId(), news.getTitle(), news.getInformation());
+        return CompletableFuture.completedFuture(new NewResponse(news.getId(), news.getTitle(), news.getInformation()));
     }
-
-    public List<NewResponse> findAll() {
-        return newsRepository.findAll().stream()
+    @Async
+    public CompletableFuture<List<NewResponse>> findAll() {
+        return CompletableFuture.completedFuture(newsRepository.findAll().stream()
                 .map(mapper::toNewsResponse)
-                .toList();
+                .toList());
     }
 
     public String deleteById(String id) {
         newsRepository.deleteById(id);
         return "User was deleted : %s".formatted(id);
     }
-
-    public Boolean findById(String id) {
-        return newsRepository.findById(id).isPresent();
+    @Async
+    public CompletableFuture<Boolean> findById(String id) {
+        return CompletableFuture.completedFuture(newsRepository.findById(id).isPresent());
     }
 
     public String findByTitle(String title) {

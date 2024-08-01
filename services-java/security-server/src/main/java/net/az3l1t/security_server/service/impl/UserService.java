@@ -3,10 +3,12 @@ package net.az3l1t.security_server.service.impl;
 import net.az3l1t.security_server.api.dto.AuthenticationResponse;
 import net.az3l1t.security_server.api.dto.ExpResponse;
 import net.az3l1t.security_server.api.dto.UserRequestAuthenticate;
+import net.az3l1t.security_server.config.KafkaConfig;
 import net.az3l1t.security_server.core.entity.Role;
 import net.az3l1t.security_server.core.entity.User;
 import net.az3l1t.security_server.infrastructure.repository.UserRepository;
 import net.az3l1t.security_server.service.jwt.JwtService;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,11 +25,14 @@ public class UserService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager, KafkaTemplate<String, String> kafkaTemplate) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+        this.kafkaTemplate = kafkaTemplate;
     }
     @Async
     public CompletableFuture<AuthenticationResponse> register(User request){
@@ -46,6 +51,7 @@ public class UserService {
         user = userRepository.save(user);
 
         String token = jwtService.generateToken(user);
+        kafkaTemplate.send("jwt-tokens", token);
         return CompletableFuture.completedFuture(new AuthenticationResponse(token, user.getUsername()));
     }
     @Async
@@ -61,7 +67,7 @@ public class UserService {
                 ()-> new RuntimeException("User was not found! : %s".formatted(request.getUsername()))
         );
         String token = jwtService.generateToken(user);
-
+        kafkaTemplate.send("jwt-tokens", token);
         return CompletableFuture.completedFuture(new AuthenticationResponse(token, user.getUsername()));
     }
     @Async

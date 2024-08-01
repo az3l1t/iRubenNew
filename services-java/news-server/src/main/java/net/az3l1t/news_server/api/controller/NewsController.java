@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/news")
@@ -20,10 +21,10 @@ public class NewsController {
     }
 
     @PostMapping
-    public ResponseEntity<NewResponse> createNews(
+    public CompletableFuture<NewResponse> createNews(
             @RequestBody  NewsRequest newsRequest
     ){
-        return ResponseEntity.ok(newsService.createNew(newsRequest));
+        return newsService.createNew(newsRequest);
     }
 
     @GetMapping("/{title}")
@@ -34,16 +35,16 @@ public class NewsController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Boolean> findById(
+    public CompletableFuture<Boolean> findById(
             @PathVariable String id
     ){
-        return ResponseEntity.ok(newsService.findById(id));
+        return newsService.findById(id);
     }
 
     @GetMapping
     @CrossOrigin(origins = "http://localhost:8010")
-    public ResponseEntity<List<NewResponse>> getAllNews(){
-        return ResponseEntity.ok(newsService.findAll());
+    public CompletableFuture<List<NewResponse>> getAllNews(){
+        return newsService.findAll();
     }
 
     @DeleteMapping("/delete/{id}")
