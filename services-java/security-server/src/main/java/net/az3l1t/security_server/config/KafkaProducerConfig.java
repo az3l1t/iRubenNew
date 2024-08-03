@@ -10,10 +10,9 @@ import org.springframework.kafka.core.ProducerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Configuration
-public class KafkaConfig {
+public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
@@ -25,8 +24,7 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate(){
+    public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-
 }

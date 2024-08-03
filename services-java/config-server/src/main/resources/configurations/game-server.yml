@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/alphabet
+    url: jdbc:postgresql://localhost:5432/game
     username: postgres
     password: Chemege1.
     driver-class-name: org.postgresql.Driver
@@ -13,8 +13,8 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  graphql:
-    graphiql:
-      enabled: true
+logging:
+  level:
+    net.az3l1t.game_server.service.impl.RecordService: INFO
 server:
-  port: 8020
+  port: 8025

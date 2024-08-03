@@ -9,7 +9,7 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
     @Bean
     public NewTopic jwtTopic(){
-        return TopicBuilder.name("jwt-tokens")
+        return TopicBuilder.name("exp-topic")
                 .partitions(1)
                 .replicas(1)
                 .build();

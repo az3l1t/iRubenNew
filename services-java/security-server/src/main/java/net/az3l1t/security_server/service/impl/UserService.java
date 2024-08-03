@@ -3,7 +3,6 @@ package net.az3l1t.security_server.service.impl;
 import net.az3l1t.security_server.api.dto.AuthenticationResponse;
 import net.az3l1t.security_server.api.dto.ExpResponse;
 import net.az3l1t.security_server.api.dto.UserRequestAuthenticate;
-import net.az3l1t.security_server.config.KafkaConfig;
 import net.az3l1t.security_server.core.entity.Role;
 import net.az3l1t.security_server.core.entity.User;
 import net.az3l1t.security_server.infrastructure.repository.UserRepository;
@@ -15,7 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -51,7 +49,7 @@ public class UserService {
         user = userRepository.save(user);
 
         String token = jwtService.generateToken(user);
-        kafkaTemplate.send("jwt-tokens", token);
+
         return CompletableFuture.completedFuture(new AuthenticationResponse(token, user.getUsername()));
     }
     @Async
@@ -67,7 +65,7 @@ public class UserService {
                 ()-> new RuntimeException("User was not found! : %s".formatted(request.getUsername()))
         );
         String token = jwtService.generateToken(user);
-        kafkaTemplate.send("jwt-tokens", token);
+
         return CompletableFuture.completedFuture(new AuthenticationResponse(token, user.getUsername()));
     }
     @Async
@@ -84,6 +82,7 @@ public class UserService {
         );
         user.setExp(user.getExp()+1);
         userRepository.save(user);
+        kafkaTemplate.send("exp-topic", "key: ", Integer.toString(1));
         return CompletableFuture.completedFuture(new ExpResponse(user.getExp()));
     }
 }

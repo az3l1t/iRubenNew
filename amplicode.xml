@@ -12,6 +12,11 @@
           <package value="net.az3l1t.alphabet_server" />
         </packages>
       </persistence-unit>
+      <persistence-unit moduleName="game-server" name="Default">
+        <packages>
+          <package value="net.az3l1t.game_server" />
+        </packages>
+      </persistence-unit>
     </persistence-units>
   </component>
 </project>
