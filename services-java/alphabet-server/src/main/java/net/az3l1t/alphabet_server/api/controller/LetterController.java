@@ -46,6 +46,13 @@ public class LetterController {
         return letterGameService.findGameByCharacter(character);
     }
 
+    @QueryMapping
+    public CompletableFuture<List<LetterGameResponse>> findAllGamesUntil(
+            @Argument Integer until
+    ){
+        return letterGameService.findAllGamesUntil(until);
+    }
+
     /*
         LetterButtonService
      */

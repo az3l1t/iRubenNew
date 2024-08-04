@@ -64,7 +64,9 @@ type Query {
     LetterGameController
     """
     findById(character: String!): LetterGameResponse
+    findAllGamesUntil(until: Int!): [LetterGameResponse]
 }
+
 
 type Mutation {
     """

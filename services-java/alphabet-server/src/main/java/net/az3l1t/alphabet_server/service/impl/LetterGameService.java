@@ -127,4 +127,15 @@ public class LetterGameService {
                 );
         return CompletableFuture.completedFuture(new LetterGameResponse(letterGame.getCharacter(), letterGame.getListOfArmenianWords(), letterGame.getListOfRussianWords()));
     }
+    @Async
+    public CompletableFuture<List<LetterGameResponse>> findAllGamesUntil(Integer until){
+        List<LetterGameResponse> result = new ArrayList<>();
+        result = letterGameRepository.findAll()
+                .stream()
+                .map(letterGameMapper::toLetterGameResponse)
+                .toList();
+        return CompletableFuture.completedFuture(result.stream()
+                .limit(until)
+                .toList());
+    }
 }

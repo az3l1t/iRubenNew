@@ -13,4 +13,8 @@ public class PageController {
     public String toAlphabet() {
         return "alphabet.html";
     }
+    @GetMapping("/game")
+    public String toGame() {
+        return "game.html";
+    }
 }

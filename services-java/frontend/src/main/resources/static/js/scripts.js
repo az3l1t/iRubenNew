@@ -91,6 +91,8 @@ $(document).ready(function() {
                 if (response.username) {
                     localStorage.setItem('username', response.username);
                     console.log('Username saved to localStorage:', response.username);
+                    // Добавьте вызов функции для создания записи здесь
+                    createRecord(response.username);
                 }
                 fetchNewsAndRedirect();
             },
@@ -101,6 +103,7 @@ $(document).ready(function() {
             }
         });
     }
+
 
     function authenticateUser(username, password) {
         $.ajax({
@@ -147,4 +150,20 @@ $(document).ready(function() {
             }
         });
     }
+
+    function createRecord(username) {
+        $.ajax({
+            url: 'http://localhost:8025',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ username: username }),
+            success: function(response) {
+                console.log('Record created:', response);
+            },
+            error: function(error) {
+                console.error('Error creating record:', error);
+            }
+        });
+    }
+
 });

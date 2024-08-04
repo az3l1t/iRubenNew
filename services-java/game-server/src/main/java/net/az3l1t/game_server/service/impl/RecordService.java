@@ -28,6 +28,12 @@ public class RecordService {
     @Async
     public CompletableFuture<RecordResponse> createRecord(RecordRequest request){
         RecordEntity recordEntity = recordMapper.toRecordEntity(request);
+        if(recordEntity.getMaxRecord() == null){
+            recordEntity.setMaxRecord(0);
+        }
+        if(recordEntity.getMaxValue()==null){
+            recordEntity.setMaxValue(0);
+        }
         if (recordEntity.getUsername() == null || recordEntity.getUsername().isEmpty()) {
             throw new IllegalArgumentException("RecordEntity : %s, RecordRequest: %s".formatted(recordEntity.getUsername(), request.getUsername()));
         }
