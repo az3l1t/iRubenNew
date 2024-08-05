@@ -17,6 +17,11 @@
           <package value="net.az3l1t.game_server" />
         </packages>
       </persistence-unit>
+      <persistence-unit moduleName="news-server" name="Default">
+        <packages>
+          <package value="net.az3l1t.news_server" />
+        </packages>
+      </persistence-unit>
     </persistence-units>
   </component>
 </project>

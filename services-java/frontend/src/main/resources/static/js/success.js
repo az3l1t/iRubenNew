@@ -1,6 +1,23 @@
 $(document).ready(function() {
     console.log('Document is ready');
 
+    // Функция для получения опыта пользователя
+    function fetchUserExperience(callback) {
+        const username = localStorage.getItem('username');
+        $.ajax({
+            url: `http://localhost:8005/${username}`,
+            method: 'GET',
+            success: function(response) {
+                const experience = response.exp;
+                if (callback) callback(experience); // Вызов коллбека с опытом
+            },
+            error: function() {
+                console.error('Ошибка получения опыта пользователя.');
+                alert('Ошибка получения вашего опыта.');
+            }
+        });
+    }
+
     // Отправляем запрос для получения новостей
     $.ajax({
         url: 'http://localhost:8015/news',
@@ -33,6 +50,7 @@ $(document).ready(function() {
         });
     }
 
+    // Обработчик кнопки "Выйти"
     document.getElementById('logout').addEventListener('click', function() {
         console.log('Logout button clicked');
         localStorage.removeItem('authToken');
@@ -40,7 +58,41 @@ $(document).ready(function() {
         window.location.href = 'index.html'; // Замените на нужный URL
     });
 
-    // Обработчики для всех элементов, которые должны перенаправлять на страницу игры
+    // Обработчики для кнопок "Слова"
+    const wordButtons = document.querySelectorAll('#words-btn, .nav-item[href="#words"]');
+    console.log('Word buttons found:', wordButtons);
+
+    wordButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Предотвращаем стандартное действие ссылки
+            console.log('Words button clicked');
+
+            const token = localStorage.getItem('authToken'); // Получаем токен из localStorage
+            if (token) {
+                $.ajax({
+                    url: '/words',
+                    type: 'GET',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + token); // Добавляем токен в заголовок запроса
+                    },
+                    success: function() {
+                        console.log('Successfully authenticated for words page');
+                        // Перенаправляем на страницу слов
+                        window.location.href = 'words'; // Относительный путь
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('Error during words request:', textStatus, errorThrown);
+                        alert('Ошибка при проверке аутентификации для страницы слов.');
+                    }
+                });
+            } else {
+                console.warn('Token аутентификации не найден.');
+                alert('Токен аутентификации не найден. Пожалуйста, войдите в систему.');
+            }
+        });
+    });
+
+    // Обработчики для кнопок "Угадайка"
     const gameButtons = document.querySelectorAll('#guess-btn, .nav-item[href="#guess"]');
     console.log('Game buttons found:', gameButtons);
 
@@ -49,31 +101,35 @@ $(document).ready(function() {
             event.preventDefault(); // Предотвращаем стандартное действие ссылки
             console.log('Guess button clicked');
 
-            const token = localStorage.getItem('authToken'); // Получаем токен из localStorage
-            console.log('Token:', token);
-
-            if (token) {
-                $.ajax({
-                    url: '/game',
-                    type: 'GET',
-                    beforeSend: function(xhr) {
-                        xhr.setRequestHeader('Authorization', 'Bearer ' + token); // Добавляем токен в заголовок запроса
-                        console.log('Sending request to /game with token:', token);
-                    },
-                    success: function() {
-                        console.log('Successfully authenticated for game');
-                        // Перенаправляем на страницу игры
-                        window.location.href = '/game'; // Относительный путь
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.error('Error during game request:', textStatus, errorThrown);
-                        alert('Ошибка при проверке аутентификации для игры.');
+            fetchUserExperience(function(experience) {
+                console.log("experience : " + experience)
+                if (experience > 0) {
+                    const token = localStorage.getItem('authToken'); // Получаем токен из localStorage
+                    if (token) {
+                        $.ajax({
+                            url: '/game',
+                            type: 'GET',
+                            beforeSend: function(xhr) {
+                                xhr.setRequestHeader('Authorization', 'Bearer ' + token); // Добавляем токен в заголовок запроса
+                            },
+                            success: function() {
+                                console.log('Successfully authenticated for game');
+                                // Перенаправляем на страницу игры
+                                window.location.href = '/game'; // Относительный путь
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                console.error('Error during game request:', textStatus, errorThrown);
+                                alert('Ошибка при проверке аутентификации для игры.');
+                            }
+                        });
+                    } else {
+                        console.warn('Token аутентификации не найден.');
+                        alert('Токен аутентификации не найден. Пожалуйста, войдите в систему.');
                     }
-                });
-            } else {
-                console.warn('Token aутентификации не найден.');
-                alert('Токен аутентификации не найден. Пожалуйста, войдите в систему.');
-            }
+                } else {
+                    alert('У вас недостаточно опыта для доступа к этому разделу.');
+                }
+            });
         });
     });
 
@@ -87,15 +143,12 @@ $(document).ready(function() {
             console.log('Alphabet button clicked');
 
             const token = localStorage.getItem('authToken'); // Получаем токен из localStorage
-            console.log('Token:', token);
-
             if (token) {
                 $.ajax({
                     url: '/alphabet',
                     type: 'GET',
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('Authorization', 'Bearer ' + token); // Добавляем токен в заголовок запроса
-                        console.log('Sending request to /alphabet with token:', token);
                     },
                     success: function() {
                         console.log('Successfully authenticated for alphabet');
@@ -108,8 +161,8 @@ $(document).ready(function() {
                     }
                 });
             } else {
-                console.warn('Token aутентификации не найден.');
-                alert('Токен aутентификации не найден. Пожалуйста, войдите в систему.');
+                console.warn('Token аутентификации не найден.');
+                alert('Токен аутентификации не найден. Пожалуйста, войдите в систему.');
             }
         });
     });

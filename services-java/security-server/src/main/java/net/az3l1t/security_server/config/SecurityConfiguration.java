@@ -1,6 +1,6 @@
 package net.az3l1t.security_server.config;
 
-import net.az3l1t.security_server.infrastructure.security.JwtAAuthenticationFilter;
+import net.az3l1t.security_server.infrastructure.security.JwtAuthenticationFilter;
 import net.az3l1t.security_server.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfiguration {
     private final UserDetailsServiceImpl userDetailsService;
-    private final JwtAAuthenticationFilter jwtAAuthenticationFilter;
+    private final JwtAuthenticationFilter jwtAAuthenticationFilter;
 
-    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService, JwtAAuthenticationFilter jwtAAuthenticationFilter) {
+    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService, JwtAuthenticationFilter jwtAAuthenticationFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtAAuthenticationFilter = jwtAAuthenticationFilter;
     }

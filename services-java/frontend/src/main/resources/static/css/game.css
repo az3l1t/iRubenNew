@@ -1,23 +1,53 @@
 body {
-    background-color: #2c3e50;
+    background-color: #000000; /* Черный фон */
     color: #ecf0f1;
     font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #343a40;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.logo-img {
+    width: 80px; /* Увеличиваем размер логотипа */
+    vertical-align: middle;
 }
 
 .main-container {
-    height: 100vh;
+    height: calc(100vh - 80px); /* Учитываем высоту header */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .game-container {
-    background-color: #34495e;
-    padding: 20px;
+    background-color: #343a40;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     width: 80%;
     max-width: 600px;
+    color: #ecf0f1;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ecf0f1;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
@@ -48,11 +78,15 @@ body {
     margin-top: 10px;
 }
 
-header {
-    background-color: #2c3e50;
-    padding: 10px 0;
+.form-control {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #bdc3c7;
+    width: calc(100% - 24px);
+    margin-bottom: 10px;
 }
 
-.logo-img {
-    width: 50px;
+.form-control:focus {
+    border-color: #3498db;
+    outline: none;
 }

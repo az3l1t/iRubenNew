@@ -122,7 +122,15 @@ $(document).ready(function() {
 
     // Обработчик нажатия на кнопку "Выйти"
     $('#logout').on('click', function() {
-        localStorage.removeItem('authToken');
-        window.location.href = 'index.html'; // Замените на нужный URL
+        $.ajax({
+            url: '/success', // Запрос на изменение страницы
+            method: 'GET',
+            success: function(response) {
+                window.location.href = '/success'; // Перенаправление на success.html
+            },
+            error: function() {
+                console.log('Ошибка при запросе изменения страницы.');
+            }
+        });
     });
 });

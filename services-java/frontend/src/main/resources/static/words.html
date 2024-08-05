@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Groups</title>
+    <link rel="stylesheet" href="css/words.css">
+</head>
+<body>
+<h1>Select a Word Group</h1>
+<div class="button-container">
+    <button onclick="loadGroup(1)">Food</button>
+    <button onclick="loadGroup(2)">Furniture</button>
+    <button onclick="loadGroup(3)">Colors</button>
+    <button onclick="loadGroup(4)">Numbers</button>
+    <button onclick="loadGroup(5)">Letters</button>
+</div>
+<div class="word-container" id="wordContainer">
+    <div id="word1" class="word"></div>
+    <div id="translation1" class="translation"></div>
+    <button id="nextButton" onclick="showNextWord()">Next</button>
+</div>
+<script src="js/words.js"></script>
+</body>
+</html>

@@ -17,4 +17,8 @@ public class PageController {
     public String toGame() {
         return "game.html";
     }
+    @GetMapping("/words")
+    public String toWords() {
+        return "words.html";
+    }
 }

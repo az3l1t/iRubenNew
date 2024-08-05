@@ -5,10 +5,8 @@ import net.az3l1t.news_server.api.dto.NewsRequest;
 import net.az3l1t.news_server.core.entity.News;
 import net.az3l1t.news_server.infrastructure.repository.NewsRepository;
 import net.az3l1t.news_server.service.mapper.NewsMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
