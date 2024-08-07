@@ -18,11 +18,14 @@
         <option value="$PROJECT_DIR$/services-java/alphabet-server/pom.xml" />
         <option value="$PROJECT_DIR$/services-java/game/pom.xml" />
         <option value="$PROJECT_DIR$/services-java/game-server/pom.xml" />
+        <option value="$PROJECT_DIR$/services-java/history-server/pom.xml" />
+        <option value="$PROJECT_DIR$/services-java/gateway/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/services-java/game/pom.xml" />
+        <option value="$PROJECT_DIR$/services-java/history-server/pom.xml" />
       </set>
     </option>
   </component>

@@ -20,7 +20,7 @@ $(document).ready(function() {
 
     // Отправляем запрос для получения новостей
     $.ajax({
-        url: 'http://localhost:8015/news',
+        url: 'http://localhost:8000/news',
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -54,6 +54,7 @@ $(document).ready(function() {
     document.getElementById('logout').addEventListener('click', function() {
         console.log('Logout button clicked');
         localStorage.removeItem('authToken');
+        localStorage.removeItem('username');
         // Перенаправление на страницу входа или домашнюю страницу
         window.location.href = 'index.html'; // Замените на нужный URL
     });

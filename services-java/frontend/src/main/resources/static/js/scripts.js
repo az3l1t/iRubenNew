@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     function registerUser(firstName, lastName, username, password) {
         $.ajax({
-            url: 'http://localhost:8005/register',
+            url: 'http://localhost:8000/register',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ firstname: firstName, lastname: lastName, username: username, password: password }),
@@ -107,7 +107,7 @@ $(document).ready(function() {
 
     function authenticateUser(username, password) {
         $.ajax({
-            url: 'http://localhost:8005/authenticate',
+            url: 'http://localhost:8000/authenticate',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ username: username, password: password }),
@@ -134,7 +134,7 @@ $(document).ready(function() {
 
     function fetchNewsAndRedirect() {
         $.ajax({
-            url: 'http://localhost:8015/news',
+            url: 'http://localhost:8000/news',
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`
@@ -153,7 +153,7 @@ $(document).ready(function() {
 
     function createRecord(username) {
         $.ajax({
-            url: 'http://localhost:8025',
+            url: 'http://localhost:8000',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ username: username }),

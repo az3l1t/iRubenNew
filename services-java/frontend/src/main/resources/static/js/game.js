@@ -9,7 +9,7 @@ $(document).ready(function() {
     // Функция для получения maxValue
     function fetchMaxValue() {
         $.ajax({
-            url: `http://localhost:8025/${username}`,
+            url: `http://localhost:8000/${username}`,
             method: 'GET',
             success: function(response) {
                 maxValue = response.maxValue;
@@ -24,7 +24,7 @@ $(document).ready(function() {
     // Функция для получения данных игры
     function fetchGameData(until) {
         $.ajax({
-            url: 'http://localhost:8020/graphql',
+            url: 'http://localhost:8000/graphql',
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({

@@ -2,10 +2,41 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
+    background: linear-gradient(to bottom right, #f0f0f0, #d0d0d0);
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #333;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease-in-out;
 }
 
 .button-container {
     margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 button {
@@ -13,19 +44,128 @@ button {
     padding: 10px 20px;
     margin: 10px;
     cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.animated-button {
+    font-size: 24px;
+    padding: 15px 30px;
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-button:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.animated-button:hover {
+    background-color: #45a049;
+}
+
+.animated-button:hover:before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.animated-button:active {
+    transform: scale(0.95);
 }
 
 .word-container {
     display: none;
     margin-top: 20px;
+    animation: fadeInUp 1s ease-in-out;
 }
 
 .word {
     font-size: 24px;
     margin-bottom: 10px;
+    animation: bounceIn 0.5s both;
 }
 
 .translation {
     font-size: 20px;
     color: #555;
+    animation: bounceIn 1s both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes bounceIn {
+    from, 20%, 40%, 60%, 80%, to {
+        animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    from {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3);
+    }
+
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        transform: scale3d(.9, .9, .9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        transform: scale3d(.97, .97, .97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+#nextButton {
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#nextButton:hover {
+    background-color: #007BB5;
+}
+
+#nextButton:active {
+    transform: scale(0.95);
 }

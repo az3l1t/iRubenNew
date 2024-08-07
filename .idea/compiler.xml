@@ -13,11 +13,13 @@
         <module name="discovery-server" />
         <module name="alphabet-server" />
         <module name="frontend" />
+        <module name="gateway" />
         <module name="security-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="game" target="17" />
+      <module name="history-server" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -28,6 +30,8 @@
       <module name="frontend" options="-parameters" />
       <module name="game" options="-parameters" />
       <module name="game-server" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="history-server" options="-parameters" />
       <module name="news-server" options="-parameters" />
       <module name="security-server" options="-parameters" />
     </option>

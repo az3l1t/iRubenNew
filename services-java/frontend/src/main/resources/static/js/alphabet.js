@@ -20,7 +20,7 @@ $(document).ready(function() {
     if (username) {
         // Запрос к серверу для получения опыта пользователя
         $.ajax({
-            url: `http://localhost:8005/${username}`,
+            url: `http://localhost:8000/${username}`,
             method: 'GET',
             success: function(response) {
                 const exp = response.exp;
@@ -91,7 +91,7 @@ $(document).ready(function() {
         const token = localStorage.getItem('authToken');
         if (token) {
             $.ajax({
-                url: 'http://localhost:8020/graphql',
+                url: 'http://localhost:8000/graphql',
                 method: 'POST',
                 contentType: 'application/json',
                 headers: {
@@ -171,7 +171,7 @@ $(document).ready(function() {
 
                             // Обновляем доступные буквы
                             $.ajax({
-                                url: 'http://localhost:8020/graphql',
+                                url: 'http://localhost:8000/graphql',
                                 method: 'POST',
                                 contentType: 'application/json',
                                 data: JSON.stringify({

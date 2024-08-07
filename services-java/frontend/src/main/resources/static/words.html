@@ -7,13 +7,16 @@
     <link rel="stylesheet" href="css/words.css">
 </head>
 <body>
+<header>
+    <img src="img/icon.svg" alt="Logo" class="logo">
+</header>
 <h1>Select a Word Group</h1>
 <div class="button-container">
-    <button onclick="loadGroup(1)">Food</button>
-    <button onclick="loadGroup(2)">Furniture</button>
-    <button onclick="loadGroup(3)">Colors</button>
-    <button onclick="loadGroup(4)">Numbers</button>
-    <button onclick="loadGroup(5)">Letters</button>
+    <button onclick="loadGroup(1)" class="animated-button">Food</button>
+    <button onclick="loadGroup(2)" class="animated-button">Furniture</button>
+    <button onclick="loadGroup(3)" class="animated-button">Colors</button>
+    <button onclick="loadGroup(4)" class="animated-button">Numbers</button>
+    <button onclick="loadGroup(5)" class="animated-button">Letters</button>
 </div>
 <div class="word-container" id="wordContainer">
     <div id="word1" class="word"></div>
